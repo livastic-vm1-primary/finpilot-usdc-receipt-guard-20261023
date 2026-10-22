@@ -71,3 +71,24 @@ test('no wallet send, approve, swap or fetch APIs in module',()=>{
  const serialized=inspectLedger(SYNTHETIC_DEMO).trust_boundary;
  assert.match(serialized,/No RPC\/wallet access/);
 });
+
+test('original MetaMask payee is public but never wallet-connected', async()=>{
+ const {readFileSync}=await import('node:fs');
+ const html=readFileSync(new URL('../docs/index.html', import.meta.url),'utf8');
+ const policy=readFileSync(new URL('../DONATIONS.md', import.meta.url),'utf8');
+ const expected='0x4e3106520E40af30870caFE78da1B1e7110eD98E';
+ const usdc='0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
+ assert.equal(html.split(expected).length,2);
+ assert.equal(html.split(usdc).length,2);
+ assert.match(html,/Base mainnet \(chain ID 8453\)/);
+ assert.ok(policy.includes(expected)&&policy.includes(usdc));
+ assert.match(html,/This is <strong>not a checkout<\/strong>/);
+ assert.doesNotMatch(html,/window\.ethereum|eth_sendTransaction|wallet_requestPermissions/);
+});
+test('support UI only copies address, no network or payment action', async()=>{
+ const {readFileSync}=await import('node:fs');
+ const html=readFileSync(new URL('../docs/index.html', import.meta.url),'utf8');
+ assert.match(html,/navigator\.clipboard\.writeText\(address\)/);
+ assert.match(html,/Clipboard permission unavailable/);
+ assert.doesNotMatch(html,/fetch\(|XMLHttpRequest|ethers\.Contract|approve\(/);
+});

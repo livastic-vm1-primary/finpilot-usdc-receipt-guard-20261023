@@ -51,10 +51,43 @@ footer{color:var(--muted);padding-bottom:5rem}
 <p>We can discuss an <strong>indicative 25 native Circle USDC on Base</strong> fixed scope: up to ten <strong>authorized, nonsecret</strong> records, a concise mismatch report and an offline test fixture. There is <strong>no checkout and no prepaid requirement</strong> here. Scope, exact compensation, legal payee, supported token/network, acceptance and AI-assisted IP rules must first be agreed in writing.</p>
 <p><a href="mailto:onecursor1@gmail.com?subject=FinPilot%20offline%20USDC%20QA%20%E2%80%94%20paid%20scope%20inquiry">Email a nonsecret paid QA inquiry</a> · <a href="https://github.com/livastic-vm1-primary/finpilot-usdc-receipt-guard-20261023/blob/main/SERVICES.md">Read complete terms</a></p>
 <small>PaperPilot Tools · AI-assisted software and technical documentation operated for one human beneficial owner. No reviews, customer purchases or income claimed.</small></section>
+
+<section class="panel" id="support">
+<h2>Support this free, local-only project (optional)</h2>
+<p>You can voluntarily send a tip to the original owner's existing MetaMask receiving account. This is <strong>not a checkout</strong>, accepted service prepayment or donation to a registered charity. No contribution is required, and <strong>no transaction is triggered by this website</strong>.</p>
+<div class="grid">
+<div><label for="gift-address">Original owner's public payee — EVM address</label>
+<input id="gift-address" value="0x4e3106520E40af30870caFE78da1B1e7110eD98E" readonly spellcheck="false" aria-describedby="gift-chain"></div>
+<div><label for="gift-token">Only for this precise tip instruction — Circle native USDC contract</label>
+<input id="gift-token" value="0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" readonly spellcheck="false"></div>
+</div>
+<p id="gift-chain">Choose <strong>Base mainnet (chain ID 8453)</strong> and its canonical Circle native USDC, not a different chain or a lookalike token. Senders independently verify all details, pay their own fees, and choose the amount (zero is fine). Never share seed phrases or wallet secrets.</p>
+<button class="secondary" id="copy-gift" type="button">Copy public receiving address</button>
+<small id="copy-gift-status" role="status" aria-live="polite"></small>
+<p><a href="https://github.com/livastic-vm1-primary/finpilot-usdc-receipt-guard-20261023/blob/main/DONATIONS.md">Full voluntary support policy and payment disclaimer</a>.</p>
+<p class="warn"><strong>Looking to hire us instead?</strong> Please do not send a tip as prepayment. Email first to agree a paid scope, permissions, deliverables, total price and legal payee. This public page cannot verify receipt or provide refunds.</p>
+</section>
+
 </main><footer>Educational example. Every demonstrated tx hash is fictional. This page does not access a blockchain and cannot prove any transfer settled. No investment, tax, legal or security audit assurance.</footer>
 <script type="module">
 import {inspectLedger,SYNTHETIC_DEMO} from './receipt-guard.mjs';
 const $=id=>document.getElementById(id);
+const giftButton=$('copy-gift');
+giftButton.addEventListener('click',async()=>{
+  // No wallet interaction or transfer; this copies a public receiving address only.
+  const address=$('gift-address').value;
+  const result=$('copy-gift-status');
+  result.textContent='';
+  try{
+    if(!navigator.clipboard || !navigator.clipboard.writeText)throw new Error('clipboard unavailable');
+    await navigator.clipboard.writeText(address);
+    result.textContent='Public EVM receiving address copied. Verify Base/USDC/recipient in your own wallet; this is not a payment.';
+  }catch{
+    $('gift-address').focus();$('gift-address').select();
+    result.textContent='Clipboard permission unavailable. The public address is selected so you can copy it manually.';
+  }
+});
+
 function td(tr,text){const cell=document.createElement('td');cell.textContent=String(text);tr.appendChild(cell)}
 function tableRows(target,records,fields){target.replaceChildren();for(const record of records){const tr=document.createElement('tr');for(const field of fields)td(tr,record[field]??'');target.appendChild(tr)}}
 function stat(label,value){const el=document.createElement('div');el.className='stat';const text=document.createElement('small');text.textContent=label;const n=document.createElement('strong');n.textContent=value;el.append(text,n);return el}

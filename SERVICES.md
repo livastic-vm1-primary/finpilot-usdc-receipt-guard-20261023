@@ -7,6 +7,15 @@ If an independent external customer wants a specific one-off audit of their
 **own, authorized and nonsecret** receipt/ledger fixtures, the operator can
 offer the following commercial service after both sides agree in writing.
 
+## Paid scope versus optional voluntary support
+
+The public demo offers optional voluntary contributions separately. Do not
+mistake those tips for payment for a report. [DONATIONS.md](DONATIONS.md) only
+identifies the existing human owner's public payee and Base native USDC
+network; no service deliverable is due for a tip. For commercial work,
+contact the operator and confirm a separate written scope, recipient and
+terms before paying.
+
 ## USDC ledger-format QA — indicative price: 25 USDC
 
 - Input: up to 10 **customer-owned, authorized, nonsecret** CSV/JSON payment

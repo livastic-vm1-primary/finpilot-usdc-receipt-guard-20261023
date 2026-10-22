@@ -53,6 +53,16 @@ deterministic analysis or `with_mesh=true` to call the **real** Mesh provider
 if configured. No account info, wallet keys or customer data should be placed
 in this public demonstration.
 
+## Optional voluntary support (not a checkout)
+
+The free browser demo also displays one **public, read-only receiving address**
+from the original human owner's existing MetaMask account. Optional tips are
+specified as **Base mainnet chain ID 8453 / native Circle USDC only**. This is
+not a required payment, invoice, paid job or expected earning: see
+[DONATIONS.md](DONATIONS.md). The website does not connect to any wallet, sign,
+broadcast, confirm an on-chain receipt or charge money. Actual unrelated
+business services need a separate written scope and payee confirmation.
+
 ## Work with the operator (optional)
 
 The code is free and MIT-licensed. An independent payer may request a **fixed
