@@ -51,6 +51,16 @@ deterministic analysis or `with_mesh=true` to call the **real** Mesh provider
 if configured. No account info, wallet keys or customer data should be placed
 in this public demonstration.
 
+## Work with the operator (optional)
+
+The code is free and MIT-licensed. An independent payer may request a **fixed
+scope offline source/receipt-format QA report** via the precise [commercial
+scope and eligibility terms](SERVICES.md). A tentative 25 Base native Circle
+USDC price is an invitation to negotiate a proper paid contract, not a
+checkout or an earned payout. Do not supply secret keys or private customer
+information, and do not expect independent chain finality proof from the
+synthetic-only engine.
+
 ## Reproducible synthetic evaluation (2026-10-23 KST)
 
 `PYTHONPATH=. python scripts/evaluate.py` produced 40 deliberately synthetic
