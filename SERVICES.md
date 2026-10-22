@@ -1,5 +1,7 @@
 # Optional fixed-scope paid QA engagement
 
+**Review the free running browser demo before making an inquiry:** https://livastic-vm1-primary.github.io/finpilot-usdc-receipt-guard-20261023/ — fictional data only, no proof of on-chain settlement.
+
 This repository is fully usable as free open-source software (MIT license).
 If an independent external customer wants a specific one-off audit of their
 **own, authorized and nonsecret** receipt/ledger fixtures, the operator can
