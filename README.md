@@ -2,6 +2,8 @@
 
 **Live, free browser demo:** https://livastic-vm1-primary.github.io/finpilot-usdc-receipt-guard-20261023/ — synthetic, local-only; no wallet connection or checkout.
 
+**One-minute original visual demo (silent):** https://livastic-vm1-primary.github.io/finpilot-usdc-receipt-guard-20261023/finpilot-base-receipt-guard-honest-demo-60s.mp4 — 60.0 seconds, synthetic sample and tested app, no verified live blockchain receipts.
+
 A real working **FastAPI multi-agent USDC planning demo**, using entirely
 synthetic records by default. It models a practical source of bad financial
 decisions: promised and pending payments, self-transfers, wrong-network tokens,
