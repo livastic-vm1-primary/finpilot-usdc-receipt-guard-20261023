@@ -1,0 +1,83 @@
+# FinPilot Receipt Guard
+
+A real working **FastAPI multi-agent USDC planning demo**, using entirely
+synthetic records by default. It models a practical source of bad financial
+decisions: promised and pending payments, self-transfers, wrong-network tokens,
+and duplicate log entries being mistaken for spendable income.
+
+## Status and eligibility
+
+Prepared for evaluation of [Agent Arena 2026](https://career.krishnaik.in/hackathons/agent-arena-2026),
+FinPilot track. **Not entered or prize-awarded until official registration and
+submission are verified**. Official rules require all LLM calls to go through
+**Mesh API**. The current implementation explicitly supports a real Mesh API
+call when `MESH_API_KEY` is configured, and **does not pretend to call a model**
+when there is no credential. Obtain a sponsor key through its normal account
+interface; do not commit it. A local mock/test without a working sponsor key
+**is not a valid final competition submission**. No unapproved human-identity
+or prize-receipt assertions.
+
+## Agents
+
+1. **IngestAgent** validates positive six-decimal USDC amounts, network, Base
+   chain ID, official Circle USDC token contract, transaction hash and log index;
+   rejects pending, future, internal and duplicate evidence.
+2. **BehaviorAgent** groups final receipts/spending over 30/60/90 days, learns
+   category medians, and flags unusually large settled expenses.
+3. **ForecastAgent** makes scenario-adjusted weighted estimates and **500
+   deterministic seeded daily bootstrap resamples**. It makes no calibrated
+   guarantee; sparse data may yield fragile or very wide forecasts.
+4. **AdviceAgent** proposes a short list of concrete, non-investment
+   interventions from calculated risk rather than a model's guesses.
+5. **VerifyAgent** checks recommendation evidence references and rejects
+   ungrounded suggestions. Optional **Mesh** natural-language rendering checks
+   any numerical tokens against computed measurements and falls back to
+   deterministic output if hallucinated. The endpoint never trades, signs, or
+   sends payments.
+
+## Run locally
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+.venv/bin/python -m pytest -q
+.venv/bin/python -m uvicorn finpilot.app:app --host 127.0.0.1 --port 8765
+```
+
+Open http://127.0.0.1:8765 to run the fully synthetic demo. `GET /demo`
+returns original test input and measured output. For user-supplied input POST
+`/analyze` using the schema in `/docs`, with `with_mesh=false` for
+deterministic analysis or `with_mesh=true` to call the **real** Mesh provider
+if configured. No account info, wallet keys or customer data should be placed
+in this public demonstration.
+
+## Reproducible synthetic evaluation (2026-10-23 KST)
+
+`PYTHONPATH=. python scripts/evaluate.py` produced 40 deliberately synthetic
+cases (480 labelled ledger rows): receipt filtering recall 1.000,
+specificity 1.000; 40/40 point-forecast purchase monotonic checks,
+40/40 deterministic replays and 40/40 internal advice reference checks.
+`pytest -q` passes 28 cases. These are **engine invariants on controlled synthetic
+fixtures, NOT observed predictive accuracy on a real financial population**,
+not an LLM benchmark and not evidence of payout or contest selection.
+See `reports/synthetic_evaluation.json`.
+
+## Honest limitations
+
+- No real payment, customer order, chain receipt or mainnet RPC is accessed.
+- USDC is a token and this analysis does **not** imply a guaranteed dollar
+  peg or compute live conversion prices. Portfolio tax/accounting not supported.
+- Bootstrap samples reuse historical observations and are **not** a calibrated
+  future-probability distribution. They are not financial/investment advice.
+- Exact contract (ERC-20 Transfer emitter) and event log ID validation are
+  essential to avoid double-booking.
+- This is **not yet a competition entry**, not Mesh-gateway validated,
+  and not a payable customer deliverable until it is accepted under written
+  terms.
+
+## Security and IP
+
+No password, OTP, private key, seed, proprietary data, wallet signature,
+transaction approval, mainnet transfer, gas, bridge, trading or user assets.
+All source was authored for this worktree. No customer bespoke code or IP
+transferred in advance of an accepted paid contract.

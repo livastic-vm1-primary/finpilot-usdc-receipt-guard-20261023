@@ -1,0 +1,176 @@
+{
+  "as_of": "2026-10-23",
+  "balance_usdc": "100.000000",
+  "data_origin": "fully_synthetic_test_data_no_real_wallet",
+  "scenario": {
+    "monthly_extra_spend_usdc": "24",
+    "income_reduction_pct": "10",
+    "one_time_purchase_usdc": "20"
+  },
+  "transactions": [
+    {
+      "id": "income-0815",
+      "date": "2026-08-15",
+      "kind": "income",
+      "amount": "85",
+      "asset": "USDC",
+      "chain": "synthetic",
+      "status": "settled",
+      "category": "synthetic freelancing"
+    },
+    {
+      "id": "rent-0820",
+      "date": "2026-08-20",
+      "kind": "expense",
+      "amount": "45",
+      "asset": "USDC",
+      "chain": "synthetic",
+      "status": "settled",
+      "category": "subscriptions"
+    },
+    {
+      "id": "spend-0828",
+      "date": "2026-08-28",
+      "kind": "expense",
+      "amount": "8",
+      "asset": "USDC",
+      "chain": "synthetic",
+      "status": "settled",
+      "category": "tools"
+    },
+    {
+      "id": "income-0903",
+      "date": "2026-09-03",
+      "kind": "income",
+      "amount": "90",
+      "asset": "USDC",
+      "chain": "synthetic",
+      "status": "settled",
+      "category": "synthetic freelancing"
+    },
+    {
+      "id": "spend-0911",
+      "date": "2026-09-11",
+      "kind": "expense",
+      "amount": "6",
+      "asset": "USDC",
+      "chain": "synthetic",
+      "status": "settled",
+      "category": "tools"
+    },
+    {
+      "id": "spend-0912",
+      "date": "2026-09-12",
+      "kind": "expense",
+      "amount": "8",
+      "asset": "USDC",
+      "chain": "synthetic",
+      "status": "settled",
+      "category": "tools"
+    },
+    {
+      "id": "rent-0921",
+      "date": "2026-09-21",
+      "kind": "expense",
+      "amount": "45",
+      "asset": "USDC",
+      "chain": "synthetic",
+      "status": "settled",
+      "category": "subscriptions"
+    },
+    {
+      "id": "income-1004",
+      "date": "2026-10-04",
+      "kind": "income",
+      "amount": "100",
+      "asset": "USDC",
+      "chain": "synthetic",
+      "status": "settled",
+      "category": "synthetic freelancing"
+    },
+    {
+      "id": "spend-1009",
+      "date": "2026-10-09",
+      "kind": "expense",
+      "amount": "7",
+      "asset": "USDC",
+      "chain": "synthetic",
+      "status": "settled",
+      "category": "tools"
+    },
+    {
+      "id": "spend-1010",
+      "date": "2026-10-10",
+      "kind": "expense",
+      "amount": "8",
+      "asset": "USDC",
+      "chain": "synthetic",
+      "status": "settled",
+      "category": "tools"
+    },
+    {
+      "id": "fraud-1010",
+      "date": "2026-10-10",
+      "kind": "income",
+      "amount": "35",
+      "asset": "USDC",
+      "chain": "synthetic",
+      "status": "pending",
+      "category": "unpaid pledge"
+    },
+    {
+      "id": "innertransfer",
+      "date": "2026-10-18",
+      "kind": "self_transfer",
+      "amount": "100",
+      "asset": "USDC",
+      "chain": "synthetic",
+      "status": "settled",
+      "category": "internal transfer"
+    },
+    {
+      "id": "rent-1020",
+      "date": "2026-10-20",
+      "kind": "expense",
+      "amount": "45",
+      "asset": "USDC",
+      "chain": "synthetic",
+      "status": "settled",
+      "category": "subscriptions"
+    },
+    {
+      "id": "duplicate-expense",
+      "date": "2026-10-20",
+      "kind": "expense",
+      "amount": "45",
+      "asset": "USDC",
+      "chain": "synthetic",
+      "status": "settled",
+      "category": "subscriptions"
+    },
+    {
+      "id": "duplicate-expense",
+      "date": "2026-10-20",
+      "kind": "expense",
+      "amount": "45",
+      "asset": "USDC",
+      "chain": "synthetic",
+      "status": "settled",
+      "category": "subscriptions"
+    },
+    {
+      "id": "wrong-chain",
+      "date": "2026-10-20",
+      "kind": "income",
+      "amount": "999",
+      "asset": "USDC",
+      "chain": "base",
+      "chain_id": 1,
+      "token_contract": "0xWrong",
+      "status": "settled",
+      "category": "bad receipt",
+      "tx_hash": "0x1111111111111111111111111111111111111111111111111111111111111111",
+      "log_index": 0
+    }
+  ]
+}

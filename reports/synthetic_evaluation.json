@@ -1,0 +1,256 @@
+{
+  "source": "independently seeded synthetic cases generated in this file",
+  "not_real_world_predictive_accuracy": true,
+  "Mesh_model_called": false,
+  "cases": 40,
+  "rows": 480,
+  "expected_valid_receipts": 240,
+  "expected_invalid_receipts": 240,
+  "receipt_filter_recall": 1.0,
+  "receipt_filter_specificity": 1.0,
+  "deterministic_replays_matching": 40,
+  "point_forecast_scenario_monotonic_15usdc": 40,
+  "advice_reference_verification_passed": 40,
+  "individual_case_summaries": [
+    {
+      "id": 0,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 1,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 2,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 3,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 4,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 5,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 6,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 7,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 8,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 9,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 10,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 11,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 12,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 13,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 14,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 15,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 16,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 17,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 18,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 19,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 20,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 21,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 22,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 23,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 24,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 25,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 26,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 27,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 28,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 29,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 30,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 31,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 32,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 33,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 34,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 35,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 36,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 37,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 38,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    },
+    {
+      "id": 39,
+      "expected_accepted": 6,
+      "actual_accepted": 6,
+      "row_count": 12
+    }
+  ]
+}
