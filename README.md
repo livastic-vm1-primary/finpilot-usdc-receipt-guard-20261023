@@ -61,6 +61,19 @@ checkout or an earned payout. Do not supply secret keys or private customer
 information, and do not expect independent chain finality proof from the
 synthetic-only engine.
 
+## Browser-only version (no wallet or account)
+
+The new `docs/index.html` uses only static HTML and a source-checked JavaScript
+module `docs/receipt-guard.mjs`. Start it with a local static HTTP server
+(eg `python3 -m http.server 8090 --directory docs`) and open the root
+page. The demo validates the *shape* of a claimed Base USDC receipt and its
+unique txHash/logIndex. It does not query the chain, verify a receipt or touch
+your wallet. It works with fictional records and provides a prospective
+25-USDC offline QA consultation link, not a direct paid checkout.
+
+The pure JS module has **15 separate Node.js unit tests** run with
+`node --test tests/browser-demo.test.mjs`. No NPM packages needed.
+
 ## Reproducible synthetic evaluation (2026-10-23 KST)
 
 `PYTHONPATH=. python scripts/evaluate.py` produced 40 deliberately synthetic

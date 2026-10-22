@@ -1,0 +1,88 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FinPilot Receipt Guard — Browser-Only USDC QA</title>
+<meta name="description" content="Free privacy-first local proof and reconciliation checks for Base USDC event-shaped records, invoice mismatches and pending payments.">
+<style>
+:root{color-scheme:light;--ink:#142336;--muted:#526477;--line:#d8e1eb;--bg:#f4f8fb;--accent:#184bd4;--ok:#006c62;--bad:#952a3c}
+*{box-sizing:border-box}body{font:15px/1.6 system-ui,sans-serif;background:var(--bg);color:var(--ink);margin:0}
+header,main,footer{max-width:1050px;margin:auto;padding:1.2rem}header{padding-top:3rem}h1{font-size:clamp(27px,4vw,43px);line-height:1.12;letter-spacing:-.03em;margin:0 0 .8rem}
+h2{font-size:19px;margin:0 0 10px}.eyebrow{font-size:12px;letter-spacing:.14em;font-weight:700;color:var(--accent)}
+.lead{font-size:18px;max-width:760px;color:var(--muted)}a{color:var(--accent)}p{margin:.55rem 0}
+.panel{background:white;border:1px solid var(--line);border-radius:15px;padding:1.4rem;margin:1.3rem 0;box-shadow:0 6px 21px rgba(17,41,72,.035)}
+.warn{background:#fff7e7;border-left:4px solid #bd8200;padding:.75rem 1rem;border-radius:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}
+small,label{color:var(--muted)}label{display:block;font-size:12px;font-weight:650;letter-spacing:.02em}
+input,textarea{font:inherit;background:#fbfdff;border:1px solid #bbc9d8;border-radius:8px;width:100%;padding:10px;color:var(--ink)}
+textarea{font-family:ui-monospace,monospace;font-size:12px;min-height:235px;resize:vertical}
+button{font:inherit;cursor:pointer;border:0;border-radius:9px;padding:10px 15px;background:var(--accent);color:white;font-weight:650;margin:8px 8px 8px 0}
+button.secondary{background:white;border:1px solid var(--accent);color:var(--accent)}
+button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid orange;outline-offset:3px}
+ul{padding-left:22px}code{font-family:ui-monospace,monospace;font-size:.91em;word-break:break-all}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px;margin:1rem 0}
+.stat{border:1px solid var(--line);border-radius:10px;padding:11px;background:#f9fcff}
+.stat strong{display:block;font-size:19px;overflow-wrap:anywhere}
+.ok{color:var(--ok)}.bad{color:var(--bad)}
+table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:8px 10px;vertical-align:top;text-align:left;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.scroll{overflow-x:auto}#results[hidden]{display:none}#error{color:var(--bad);font-weight:650;white-space:pre-wrap}
+footer{color:var(--muted);padding-bottom:5rem}
+</style></head><body>
+<header><p class="eyebrow">PAPERPILOT TOOLS · PUBLIC TEST PRODUCT</p><h1>FinPilot Receipt Guard</h1>
+<p class="lead">Learn exactly why an unpaid USDC invoice, duplicate transfer event or wrong-network token must not turn into a <strong>“Paid”</strong> badge.</p>
+<p class="warn"><strong>Local-only:</strong> all calculations stay in your browser. No wallet connect, transfer, RPC, API key, upload, authentication, cookies, tracking or account required. This is <strong>format validation and budget simulation only</strong>, not independent blockchain settlement proof. Please use fictional or nonsecret sample data.</p>
+<p><a href="https://github.com/livastic-vm1-primary/finpilot-usdc-receipt-guard-20261023">Open source and 28 passing Python tests</a> · <a href="https://github.com/livastic-vm1-primary/finpilot-usdc-receipt-guard-20261023/blob/main/SERVICES.md">Optional 25 USDC offline QA service</a></p></header>
+<main>
+<section class="panel"><h2>Run a reproducible example</h2><p>The initial data is entirely synthetic. You may edit the JSON below; nothing is transmitted or saved.</p>
+<div class="grid"><div><label for="asof">Ledger observation date (UTC)</label><input id="asof" type="date" value="2026-10-23"></div><div><label for="balance">Reported available USDC balance (not wallet-verified)</label><input id="balance" inputmode="decimal" value="120"></div>
+<div><label for="extra">Additional monthly expenses (USDC)</label><input id="extra" inputmode="decimal" value="15"></div>
+<div><label for="one">One-time contemplated outlay (USDC)</label><input id="one" inputmode="decimal" value="10"></div>
+<div><label for="drop">Income reduction, stress scenario (%)</label><input id="drop" type="number" value="20" min="0" max="100" step=".01"></div></div>
+<p><label for="rows">Test event records — canonical Base USDC structural checks / synthetic fixtures</label><textarea id="rows" spellcheck="false" aria-describedby="example-description"></textarea></p>
+<small id="example-description">Supported fields: id, date, kind, amount, asset, chain, status, category; Base rows additionally require chain_id=8453, token_contract, 66-character tx_hash and log_index. Reported status alone is not proof.</small>
+<div><button id="analyze">Analyze locally</button><button class="secondary" id="reset">Restore fictional sample</button></div>
+<p id="error" role="alert" aria-live="assertive"></p></section>
+<section id="results" hidden class="panel" aria-live="polite">
+<h2>Result · simulated observation</h2><p id="trust" class="warn"></p>
+<div class="stats" id="stats"></div>
+<h2>Suggested checks</h2><ul id="advice"></ul>
+<h2>Included event-shaped rows</h2><div class="scroll"><table><thead><tr><th>ID</th><th>Type</th><th>Amount</th><th>Evidence classification</th></tr></thead><tbody id="accepted"></tbody></table></div>
+<h2>Excluded rows and reasons</h2><div class="scroll"><table><thead><tr><th>ID</th><th>Why not income or outflow?</th></tr></thead><tbody id="rejected"></tbody></table></div>
+</section>
+<section class="panel"><h2>Want a source-grounded QA report for your team?</h2>
+<p>We can discuss an <strong>indicative 25 native Circle USDC on Base</strong> fixed scope: up to ten <strong>authorized, nonsecret</strong> records, a concise mismatch report and an offline test fixture. There is <strong>no checkout and no prepaid requirement</strong> here. Scope, exact compensation, legal payee, supported token/network, acceptance and AI-assisted IP rules must first be agreed in writing.</p>
+<p><a href="mailto:onecursor1@gmail.com?subject=FinPilot%20offline%20USDC%20QA%20%E2%80%94%20paid%20scope%20inquiry">Email a nonsecret paid QA inquiry</a> · <a href="https://github.com/livastic-vm1-primary/finpilot-usdc-receipt-guard-20261023/blob/main/SERVICES.md">Read complete terms</a></p>
+<small>PaperPilot Tools · AI-assisted software and technical documentation operated for one human beneficial owner. No reviews, customer purchases or income claimed.</small></section>
+</main><footer>Educational example. Every demonstrated tx hash is fictional. This page does not access a blockchain and cannot prove any transfer settled. No investment, tax, legal or security audit assurance.</footer>
+<script type="module">
+import {inspectLedger,SYNTHETIC_DEMO} from './receipt-guard.mjs';
+const $=id=>document.getElementById(id);
+function td(tr,text){const cell=document.createElement('td');cell.textContent=String(text);tr.appendChild(cell)}
+function tableRows(target,records,fields){target.replaceChildren();for(const record of records){const tr=document.createElement('tr');for(const field of fields)td(tr,record[field]??'');target.appendChild(tr)}}
+function stat(label,value){const el=document.createElement('div');el.className='stat';const text=document.createElement('small');text.textContent=label;const n=document.createElement('strong');n.textContent=value;el.append(text,n);return el}
+function run(){
+ $('error').textContent='';$('results').hidden=true;
+ try{
+  const rows=JSON.parse($('rows').value);
+  if(!Array.isArray(rows))throw new Error('Event JSON must be an array.');
+  const input={as_of:$('asof').value,balance_usdc:$('balance').value,
+   scenario:{monthly_extra_spend_usdc:$('extra').value,
+   one_time_purchase_usdc:$('one').value,income_reduction_pct:$('drop').value},
+   data_origin:"browser-local caller input, not verified",transactions:rows};
+  const result=inspectLedger(input);
+  $('trust').textContent=result.trust_boundary;
+  $('stats').replaceChildren(
+   stat('Structurally included rows',String(result.included_count)),
+   stat('Excluded rows',String(result.rejected_count)),
+   stat('Reported last 30d gross inflow',result.last_30d.income_usdc+' USDC'),
+   stat('Reported 30d outflow',result.last_30d.expense_usdc+' USDC'),
+   stat('Illustrative next balance',result.scenario.point_end_balance_usdc+' USDC'),
+   stat('Mechanical 70/130% stress balance',result.scenario.stress_end_balance_usdc+' USDC')
+  );
+  $('advice').replaceChildren();for(const a of result.recommendations){const li=document.createElement('li');li.textContent=a.title+' — '+a.reason;$('advice').appendChild(li)}
+  tableRows($('accepted'),result.accepted,['id','kind','amount_usdc','evidence']);
+  tableRows($('rejected'),result.rejected,['id','reason']);
+  $('results').hidden=false;
+ }catch(e){$('error').textContent='Cannot analyze: '+e.message}
+}
+function reset(){const x=SYNTHETIC_DEMO;$('asof').value=x.as_of;$('rows').value=JSON.stringify(x.transactions,null,2);$('balance').value=x.balance_usdc;$('extra').value=x.scenario.monthly_extra_spend_usdc;$('one').value=x.scenario.one_time_purchase_usdc;$('drop').value=x.scenario.income_reduction_pct;run()}
+$('analyze').addEventListener('click',run);$('reset').addEventListener('click',reset);reset();
+</script></body></html>
