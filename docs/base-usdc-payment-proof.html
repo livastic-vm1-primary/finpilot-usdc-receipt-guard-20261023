@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Did That Base USDC Bounty Actually Pay? A 7-Check Receipt Guide (2026) | FinPilot</title>
+<meta name="description" content="Check a Base USDC bounty payment without mistaking an advertised reward, accepted PR or platform-paid badge for a settled ERC-20 transfer. Seven checks, synthetic example, QA template.">
+<link rel="canonical" href="https://livastic-vm1-primary.github.io/finpilot-usdc-receipt-guard-20261023/base-usdc-payment-proof.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Did That Base USDC Bounty Actually Pay? A 7-Check Receipt Guide">
+<meta property="og:description" content="Seven evidence checks: funded promise, approval, exact chain, Circle token, payee, finality and unique transfer log. No wallet connection.">
+<meta property="og:url" content="https://livastic-vm1-primary.github.io/finpilot-usdc-receipt-guard-20261023/base-usdc-payment-proof.html">
+<meta name="robots" content="index,follow">
+<style>
+:root{color-scheme:light;--ink:#142335;--muted:#536679;--accent:#1545ba;--border:#dbe4ee;--bg:#f5f8fc;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main,header,footer{max-width:890px;margin:auto;padding:24px}header{padding-top:46px}a{color:var(--accent)}a:hover{text-decoration-thickness:2px}
+h1{font-size:clamp(29px,5vw,43px);line-height:1.18;letter-spacing:-.025em;margin:.3em 0}h2{line-height:1.25;font-size:23px;margin-top:1.6em}h3{font-size:17px;margin-bottom:.2em}
+.lead{font-size:18px;color:var(--muted);max-width:750px}.eyebrow{letter-spacing:.11em;font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase}
+.card{border:1px solid var(--border);border-radius:13px;padding:20px;background:var(--white);margin:22px 0;box-shadow:0 5px 18px #12315b08}
+.alert{background:#fff8e8;border-left:4px solid #b47900;padding:14px 17px;margin:18px 0}
+.good{border-left:4px solid #177c63;padding:12px 18px;background:#f0fbf7}.no{border-left:4px solid #a42b43;padding:12px 18px;background:#fff3f5}
+small,.muted{color:var(--muted)}code{background:#e8eef6;border-radius:4px;padding:2px 4px;overflow-wrap:anywhere}pre{background:#142335;color:#fff;overflow-x:auto;padding:18px;border-radius:9px;line-height:1.45}pre code{background:transparent;padding:0;color:inherit}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{border-bottom:1px solid var(--border);text-align:left;padding:10px;vertical-align:top}.scroll{overflow-x:auto}
+nav a{margin-right:15px}ul,ol{padding-left:25px}li{margin-bottom:8px}
+.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:11px 19px;border-radius:9px;font-weight:650;margin:7px 9px 7px 0}.btn:hover{color:#fff;background:#082e90}.secondary{background:#fff;color:var(--accent);border:1px solid var(--accent)}
+footer{padding-bottom:70px;color:var(--muted);font-size:13px}
+@media(max-width:600px){header,main,footer{padding:16px}h1{font-size:30px}th,td{padding:8px}}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","headline":"Did That Base USDC Bounty Actually Pay? A 7-Check Receipt Guide (2026)","datePublished":"2026-10-23","dateModified":"2026-10-23","author":{"@type":"Organization","name":"PaperPilot Tools"},"publisher":{"@type":"Organization","name":"PaperPilot Tools"},"mainEntityOfPage":"https://livastic-vm1-primary.github.io/finpilot-usdc-receipt-guard-20261023/base-usdc-payment-proof.html","description":"How to distinguish promised crypto bounty payments from finalized and uniquely attributable Base Circle USDC receipts."}
+</script>
+</head>
+<body>
+<header>
+<p class="eyebrow">PaperPilot Tools / USDC payment operations / Updated 23 October 2026</p>
+<nav aria-label="Site navigation"><a href="./">Free FinPilot demo</a><a href="#checks">Seven checks</a><a href="#qa">Hire a scoped QA review</a></nav>
+<h1>Did that <abbr title="USD Coin">USDC</abbr> developer bounty actually pay?</h1>
+<p class="lead">An approved pull request is not automatically a paid invoice. A “$100 bounty” listing, an escrow promise, a green checkmark, and an external settled token transfer are four different kinds of evidence. Here is a seven-step, <strong>read-only</strong> checklist for Base mainnet Circle USDC.</p>
+<p class="alert"><strong>Safety boundary:</strong> This educational guide never connects a wallet, signs anything, scans your transactions, or verifies a payment for you. Always independently inspect authoritative chain receipts. The examples below are fictional; do not paste real sensitive customer data into public tools.</p>
+</header>
+<main>
+<section class="card">
+<h2>First identify what you actually have</h2>
+<div class="scroll"><table><thead><tr><th>Evidence shown to you</th><th>Correct accounting status</th><th>Still missing</th></tr></thead>
+<tbody>
+<tr><td>“Bounty: 200 USDC” on an open task</td><td>Advertised opportunity; <strong>not income</strong></td><td>Eligibility, a signed/funded agreement, acceptance and payment</td></tr>
+<tr><td>Your PR is submitted or technically merged</td><td>Work performed; payment may still be <strong>unapproved</strong></td><td>Buyer award, contract terms, actual settlement</td></tr>
+<tr><td>Task marked “accepted”, “payable” or “promised”</td><td>Potential receivable only if legal terms establish one; <strong>not wallet cash</strong></td><td>Independent on-chain payment evidence</td></tr>
+<tr><td>Platform says “paid” and provides a hash</td><td>Claim of payment; verify chain, asset, recipient, status and finality</td><td>Unique verified ERC-20 Transfer log to your payee</td></tr>
+<tr><td>Finalized matching external transfer, reconciled exactly once</td><td><strong>Candidate for realized crypto receipt</strong>, subject to ownership, refunds, fees and tax</td><td>Owner-wide ledger deduplication and applicable accounting policy</td></tr>
+</tbody></table></div>
+<p class="muted">Platforms differ: an escrow-funded bounty can prove funds are deposited without proving that this particular worker has been awarded or paid. Conversely, an unfunded promise does not create escrow.</p>
+</section>
+<section id="checks" class="card">
+<h2>Seven checks before displaying “Paid”</h2>
+<ol>
+<li><strong>Same work, real buyer and written acceptance.</strong> Match a unique work/order ID to the buyer's actual agreed payment terms. Distinguish “submitted”, “accepted”, “settled” and “paid”. A sponsor's compliment about code quality is not necessarily a payout instruction.</li>
+<li><strong>Exact network.</strong> Confirm you are looking at <strong>Base mainnet, chain ID 8453</strong> (<code>eth_chainId = 0x2105</code>), not Ethereum, Base Sepolia or another L2. The same 0x-shaped wallet address can exist on several networks.</li>
+<li><strong>Exact token contract.</strong> Native Circle USDC on Base is <code>0x833589fCD6eDb6E08f4C7C32D4f71b54bdA02913</code>. Compare the full address to <a href="https://developers.circle.com/stablecoins/usdc-contract-addresses">Circle's official contract list</a>; do not trust a token name, icon, ticker or screenshot alone. USDbC (bridged USDC) is a different asset.</li>
+<li><strong>Transaction receipt status.</strong> Obtain a real <code>txHash</code> from a trustworthy explorer or authorized read-only RPC. The receipt must exist, correspond to that hash, and have <code>status = 0x1</code>. Pending, reverted and nonexistent transactions do not count.</li>
+<li><strong>Actual payee, event and amount.</strong> Inspect an <em>ERC-20 <code>Transfer(address,address,uint256)</code> log emitted by Circle's token contract</em>. The decoded <code>to</code> must be your genuine agreed payee; the decoded <code>value</code> must meet the agreed amount. USDC has <strong>six decimals</strong>: 1 USDC is 1,000,000 atomic units. Beware transfers to a look-alike address, a different recipient, or another token contract.</li>
+<li><strong>Finality appropriate to Base.</strong> The transaction's block must have reached a finality threshold consistent with your policy (for example the node's <code>finalized</code> chain head). A transaction visible in a preconfirmation feed or merely included in a recent block may not have the same settlement assurance. Do not confuse L2 transaction finality with L1 withdrawal challenge-period terminology.</li>
+<li><strong>Independent, unique economic receipt.</strong> Count the event by at least <code>(chainId, txHash, logIndex)</code>, once across your books. Flag wallet-to-self transfers, refund reversals, the same hash appearing twice in CSV exports, incorrect payment attribution, fees and legal tax implications. Even a valid transfer might be a refund, an internal move or payment for a different customer.</li>
+</ol>
+<p class="good"><strong>A useful final field:</strong> <code>payment_evidence_state = "verified_external_finalized_unique"</code> is an evidence classification, <em>not</em> a guarantee of collectability, ownership or net profit. Preserve the original receipt URL, amount, chain, payee, block, log index and classification reason.</p>
+</section>
+<section class="card">
+<h2>Fictional 1 USDC example: good-looking proof can still fail</h2>
+<p>Imagine an AI coding bounty says “1 USDC promised on Base” to a worker. The platform records <code>work.state=submitted</code> and <code>reward.state=promised</code>. The code is useful but no independent payment hash exists. Its correct current wallet-cash figure is <strong>0 USDC</strong>, not 1 USDC.</p>
+<p>Only once the issuer pays can you evaluate a transfer like the wholly <em>fictional</em> row below:</p>
+<pre><code>network:       Base mainnet / eip155:8453
+tokenContract: 0x833589fCD6eDb6E08f4C7C32D4f71b54bdA02913
+txHash:        [illustrative 32-byte transaction hash]
+logIndex:      [illustrative single log index]
+receiptStatus: 0x1
+Transfer.to:   [the real pre-agreed customer payee]
+Transfer.value:1000000  # six decimals = 1.000000 USDC
+blockFinality: [independently confirmed finalized block]
+ledgerMatch:   [not previously booked elsewhere]</code></pre>
+<p class="no"><strong>Do not copy this into a payout form.</strong> This is a schema illustration only; it contains no real transaction receipt and cannot substantiate a claim that somebody paid anybody.</p>
+</section>
+<section class="card">
+<h2>Five mistakes that can erase your margin</h2>
+<ul>
+<li><strong>Working before sponsor approval:</strong> “First merged PR wins” contests can pay nothing to every other contributor.</li>
+<li><strong>Overlooking task bonds:</strong> A refundable 1 USDC bond is still capital at risk if your claim expires or is rejected.</li>
+<li><strong>Ignoring the payout rail:</strong> A prize payable via Stripe Connect, Solana USDC, Stellar or a custodial balance is not already native Base USDC in your existing EVM wallet.</li>
+<li><strong>Confusing a provider's dashboard with independent settlement:</strong> A self-reported platform transaction counter can include pending or internal test payments.</li>
+<li><strong>Booking the same transfer multiple times:</strong> A transfer may appear in an explorer, a task dashboard, an emailed receipt and two CSV rows. It remains only one economic event.</li>
+</ul>
+</section>
+<section class="card">
+<h2>Free local demo and source references</h2>
+<p>Try the <a href="./">FinPilot Receipt Guard browser demo</a>. It runs entirely in your browser on <strong>synthetic, nonsecret records</strong> and flags wrong-chain data, duplicates, missing evidence and promised-but-unpaid entries. It does <em>not</em> perform chain RPC reads or independently confirm a real payment.</p>
+<ul>
+<li><a href="https://developers.circle.com/stablecoins/usdc-contract-addresses">Circle — authoritative USDC contract addresses</a></li>
+<li><a href="https://www.circle.com/multi-chain-usdc/base">Circle — USDC on Base</a></li>
+<li><a href="https://docs.base.org/base-chain/api-reference/ethereum-json-rpc-api/eth_chainId">Base documentation — eth_chainId (Base 8453)</a></li>
+<li><a href="https://github.com/livastic-vm1-primary/finpilot-usdc-receipt-guard-20261023">Source code and reproducible synthetic tests</a></li>
+</ul>
+</section>
+<section class="card" id="qa">
+<h2>Need a defined payment-ledger QA report?</h2>
+<p><strong>Indicative 25 native Circle USDC on Base</strong> for a bounded offline review: up to ten <em>customer-owned, nonsecret, authorized</em> CSV/JSON event-shaped records; a short mismatch/finality-claim report; and one reproducible test fixture. The exact price, legal customer, deliverables, acceptance, IP, refund rights, supported payee and payment timing require a separate <strong>written agreement first</strong>.</p>
+<p>We are one Korea-based owner using <strong>disclosed AI-assisted</strong> research and code. No independent professional certification, client testimonials or past paid sales of this product are claimed. Do not send personal information, wallet keys, production credentials or confidential financial data in an initial inquiry.</p>
+<p><a class="btn" href="mailto:onecursor1@gmail.com?subject=FinPilot%20offline%20USDC%20QA%20%E2%80%94%20paid%20scope%20inquiry&amp;body=Please%20describe%20the%20nonsecret%20scope%2C%20expected%20chain%2Ftoken%2C%20and%20desired%20acceptance%20criteria.%20No%20secrets%20or%20sensitive%20data.">Ask about a paid fixed-scope review</a><a class="btn secondary" href="https://github.com/livastic-vm1-primary/finpilot-usdc-receipt-guard-20261023/blob/main/SERVICES.md">Read full terms</a></p>
+<p class="muted">No online checkout, automated invoice or required prepayment. Do not send crypto merely because you see a receiving address or this offer. No customer contract or revenue is implied by this page.</p>
+</section>
+</main>
+<footer>
+<p><a href="./">Back to the free demo</a> · <a href="https://github.com/livastic-vm1-primary/finpilot-usdc-receipt-guard-20261023">View source</a> · <a href="#checks">Seven checks</a></p>
+<p>© 2026 PaperPilot Tools. Educational software documentation, not investment, financial, legal or tax advice. Date-checked 23 October 2026. All illustrative transfers are fictional. No wallet is accessed.</p>
+</footer>
+</body>
+</html>

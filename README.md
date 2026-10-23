@@ -66,6 +66,8 @@ broadcast, confirm an on-chain receipt or charge money. Actual unrelated
 business services need a separate written scope and payee confirmation.
 
 ## Work with the operator (optional)
+**Payment proof field guide:** A practical, cited, free article on separating crypto bounty promises, upstream code acceptance and independently settled native Base Circle USDC: [7 checks before marking a bounty paid](https://livastic-vm1-primary.github.io/finpilot-usdc-receipt-guard-20261023/base-usdc-payment-proof.html). The guide uses only fictional sample rows; it includes an honest, separately negotiated 25-USDC nonsecret QA inquiry, not an automatic checkout.
+
 
 The code is free and MIT-licensed. An independent payer may request a **fixed
 scope offline source/receipt-format QA report** via the precise [commercial
