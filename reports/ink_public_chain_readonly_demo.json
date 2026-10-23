@@ -1,0 +1,30 @@
+{
+  "schema": "finpilot-ink-readonly-receipt-smoke-v1",
+  "checkedAtUTC": "2026-10-23T04:57:58.294Z",
+  "officialPublicRPC": "https://rpc-gel.inkonchain.com",
+  "officialTokenSource": "https://docs.inkonchain.com/build/paymaster-integration/payment-tokens",
+  "input": {
+    "transactionHash": "0xba6e3b6a1fcfeb40a88f3f227da3929c89396b393c3974444804af5c37d123da",
+    "recipient": "0x555b71adee57e1bf49dcc793ba1694b331b728cd",
+    "sender": "0xea4d854020d4a4af4d27a05f0bdcf1c57f1b8055",
+    "minUSDC": "20.541761"
+  },
+  "proof": {
+    "verified": true,
+    "state": "INK_RPC_FINALIZED_TRANSFER",
+    "chainId": 57073,
+    "token": "0x2D270e6886d130D724215A266106e6832161EAEd",
+    "tokenDecimals": 6,
+    "from": "0xea4d854020d4a4af4d27a05f0bdcf1c57f1b8055",
+    "to": "0x555b71adee57e1bf49dcc793ba1694b331b728cd",
+    "valueUSDC": "20.541761",
+    "rawAtomic": "20541761",
+    "txHash": "0xba6e3b6a1fcfeb40a88f3f227da3929c89396b393c3974444804af5c37d123da",
+    "logIndex": 1,
+    "dedupKey": "57073:0xba6e3b6a1fcfeb40a88f3f227da3929c89396b393c3974444804af5c37d123da:1",
+    "blockNumber": "59231237",
+    "inkRpcFinalizedHeight": "59231816",
+    "warning": "Only this Ink JSON-RPC canonical finalized tag + a precise USDC Transfer. This does not establish a commercial buyer, a signed SOW, L1 withdrawal finality, legal income, tax status or a nonduplicated accounting entry."
+  },
+  "disclaimer": "This is a publicly observable unrelated third-party transfer; no VM1 wallet, customer order, owner receipts, work payment or grant revenue. Ink RPC finalized tag does not prove Ethereum L1 challenge-period finality. No funds sent, wallet signed or secret used."
+}

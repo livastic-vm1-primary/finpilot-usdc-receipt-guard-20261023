@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Verify one real Ink mainnet native USDC ERC-20 Transfer receipt, exact recipient, amount, event log, canonical block and finalized Ink RPC head — no wallet needed.">
+<title>Ink USDC Receipt Proof — FinPilot | PaperPilot Tools</title>
+<style>
+:root{color-scheme:light;--ink:#182438;--muted:#596a7b;--line:#dbe5eb;--bg:#f6f9fc;--accent:#155bb5;--green:#086a51;--red:#a0323f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 system-ui,-apple-system,sans-serif}
+header,main,footer{max-width:940px;margin:0 auto;padding:1.2rem}header{padding-top:2.7rem}
+.eyebrow{letter-spacing:.13em;font-weight:700;text-transform:uppercase;font-size:12px;color:var(--accent)}
+h1{font-size:clamp(30px,4vw,48px);letter-spacing:-.045em;line-height:1.07;margin:.6rem 0 1rem}
+.lead{font-size:19px;line-height:1.5;max-width:800px;color:var(--muted)}
+a{color:var(--accent)}.panel{background:white;border:1px solid var(--line);border-radius:15px;padding:1.35rem 1.5rem;margin:1rem 0;box-shadow:0 5px 25px #18243809}
+.info{border-left:4px solid #e5a300;background:#fffaee;padding:.8rem 1rem;border-radius:4px}
+.ok{color:var(--green)}.bad{color:var(--red)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:13px}
+label{font-size:12px;color:var(--muted);font-weight:700;display:block;margin-bottom:5px}
+input{width:100%;background:#fbfdff;border:1px solid #b9cbd7;border-radius:7px;padding:10px;font:13px ui-monospace,monospace;color:var(--ink);min-width:0}
+button{padding:11px 17px;background:var(--accent);color:white;border:0;border-radius:9px;cursor:pointer;font:700 14px system-ui;margin:10px 10px 5px 0}
+button.secondary{background:white;color:var(--accent);border:1px solid var(--accent)}
+button:disabled{opacity:.6;cursor:wait}
+a:focus-visible,input:focus-visible,button:focus-visible{outline:3px solid orange;outline-offset:3px}
+small{color:var(--muted)}p{margin:.65rem 0}.meter{border:1px solid var(--line);border-radius:9px;padding:10px;margin:12px 0;background:#f9fcff}
+dl{display:grid;grid-template-columns:minmax(140px,1fr) 2fr;gap:8px 20px}dt{color:var(--muted);font-weight:600}dd{margin:0;overflow-wrap:anywhere;font:13px/1.7 ui-monospace,monospace}
+code{overflow-wrap:anywhere;font-family:ui-monospace,monospace}
+footer{font-size:13px;color:var(--muted);padding-bottom:4rem}
+#proof[hidden]{display:none}#status{white-space:pre-wrap}
+</style></head>
+<body>
+<header><p class="eyebrow">PAPERPILOT TOOLS · INK MAINNET · PUBLIC RPC ONLY</p>
+<h1>Did that Ink USDC transfer really land?</h1>
+<p class="lead">Inspect a <strong>real</strong> Circle-native Ink USDC receipt, match the <strong>recipient, amount and unique Transfer log</strong>, then check the block against Ink's RPC-reported finalized head. No wallet login or signing.</p>
+<p><a href="./index.html">← Synthetic-only Base receipt lab</a> · <a href="https://github.com/livastic-vm1-primary/finpilot-usdc-receipt-guard-20261023">Source code & tests</a> · <a href="https://docs.inkonchain.com/general/network-information">Ink network docs</a></p>
+<div class="info"><strong>Evidence limits.</strong> A token Transfer on Ink is not the same as a paid invoice, legitimate work order, independent buyer, or recognized profit. This tool trusts Ink's public RPC and its <code>finalized</code> tag; it does not independently prove Ethereum L1 withdrawal finality or protect you against dishonest RPC servers. Always reconcile exact txHash + logIndex in your own ledger.</div></header>
+<main>
+<section class="panel">
+<h2>Verify an incoming on-chain transfer</h2>
+<p>No upload or account. This page sends only a public transaction hash to Ink's official public JSON-RPC. Addresses and transfer events are public onchain. It does not request your seed or wallet permissions.</p>
+<form id="f">
+<div><label for="tx">Ink mainnet transaction hash (0x + 64 hexadecimal)</label><input id="tx" type="text" required autocomplete="off" spellcheck="false" placeholder="0x…" maxlength="66"></div>
+<div class="grid">
+<div><label for="to">Expected exact recipient address (0x + 40 hexadecimal)</label><input id="to" type="text" required autocomplete="off" spellcheck="false" placeholder="0x…" maxlength="42"></div>
+<div><label for="min">Minimum amount transferred (USDC, 6 decimals)</label><input id="min" type="text" required inputmode="decimal" autocomplete="off" value="0.05" maxlength="30"></div>
+</div>
+<div><label for="from">Expected payer EVM address — optional but recommended for commercial reconciliation</label><input id="from" type="text" autocomplete="off" spellcheck="false" placeholder="Leave empty to accept any external sender" maxlength="42"></div>
+<button id="go" type="submit">Verify exact Ink receipt</button>
+<button id="sample" class="secondary" type="button">Load a real public example (not our payment)</button>
+<p><small>Official Ink chain ID <code>57073</code>. Native Circle USDC ERC-20 <code>0x2D270e6886d130D724215A266106e6832161EAEd</code>. Neither a bridged lookalike nor Base USDC qualifies here.</small></p>
+</form><p id="status" aria-live="polite" role="status"></p>
+</section>
+<section class="panel" id="proof" hidden aria-live="polite">
+<h2>Verification report</h2><p id="verdict"></p><div id="proof-data"></div>
+<p class="info">This report is proof of a specific matching Ink transfer only. No checkout, account, tax determination, independent L1 consensus verification or legal payment contract is included.</p>
+</section>
+<section class="panel">
+<h2>What can this prove?</h2>
+<div class="grid">
+<div><h3>Confirmed by the checker</h3><p>Correct Ink mainnet chain, canonical Circle token, successful transaction, correct recipient, one unambiguous external Transfer event above your minimum, canonical receipt block hash, and finalization head at or after that block.</p></div>
+<div><h3>What still needs human review</h3><p>Commercial buyer identity, signed scope of work, final payment terms, whether this tx was a gift or self-funded wash payment, independent RPC trust, tax accounting, duplicate settlement and any L1 withdrawal dispute period.</p></div>
+</div>
+<h2>Original developer proof</h2><p>Implemented as a lightweight static JavaScript module with no new packages. Unit tests inject synthetic bad receipt shapes; the real example fetches a separate third-party Ink transfer from the official RPC to demonstrate live operation. It never transacts.</p>
+<p><a href="https://www.circle.com/multi-chain-usdc/ink">Circle Ink USDC documentation</a> · <a href="https://docs.inkonchain.com/build/paymaster-integration/payment-tokens">Canonical token address (Ink docs)</a> · <a href="https://github.com/livastic-vm1-primary/finpilot-usdc-receipt-guard-20261023/blob/main/SERVICES.md">Discuss authorized nonsecret USDC QA scope (indicative 25 USDC)</a></p>
+</section></main>
+<footer>FinPilot is a free MIT-licensed AI-assisted developer project operated for one human beneficial owner in South Korea. A verified public third-party sample does not indicate revenue earned by this project. No private key, wallet connect, signature, transaction, transfer, gas expenditure, cookies or tracking is involved.</footer>
+<script type="module">
+import {verifyInkUSDC,createInkRPC,INK_EXPLORER} from './ink-usdc-proof.mjs';
+const el=id=>document.getElementById(id);
+el('sample').addEventListener('click',()=>{
+  // Real, independently read public Ink chain example. Not the owner's receipt.
+  el('tx').value='0xba6e3b6a1fcfeb40a88f3f227da3929c89396b393c3974444804af5c37d123da';
+  el('to').value='0x555b71adee57e1bf49dcc793ba1694b331b728cd';
+  el('from').value='0xea4d854020d4a4af4d27a05f0bdcf1c57f1b8055';
+  el('min').value='20.541761';
+  el('status').textContent='Loaded one unrelated public onchain receipt for demonstration. Select Verify to read current Ink finalized state.';
+  el('proof').hidden=true;
+});
+el('f').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const b=el('go');b.disabled=true;el('status').textContent='Reading official Ink public JSON-RPC; no wallet signing…';el('proof').hidden=true;
+  try{
+    const result=await verifyInkUSDC({transactionHash:el('tx').value,recipient:el('to').value,minUSDC:el('min').value,sender:el('from').value,rpc:createInkRPC()});
+    el('proof').hidden=false;
+    el('proof-data').replaceChildren();
+    const v=el('verdict');
+    if(!result.verified){
+      v.textContent='NOT VERIFIED — '+result.reason.replaceAll('_',' ');
+      v.className='bad';el('status').textContent='The requested transfer cannot be marked confirmed. No inference of lost funds is made.';
+      return;
+    }
+    v.className='ok';v.textContent='RPC-FINALIZED Ink USDC transfer matched. Not proof of commercial income.';
+    el('status').textContent='A public onchain event was found; do not book it twice or treat it as automatically paid work.';
+    const data=[
+      ['Network','Ink Mainnet · chain 57073'],
+      ['Canonical token',result.token],
+      ['Transferred USDC',result.valueUSDC],
+      ['Sender',result.from],
+      ['Recipient',result.to],
+      ['Ink block',result.blockNumber],
+      ['RPC finalized head',result.inkRpcFinalizedHeight],
+      ['Transfer logIndex',String(result.logIndex)],
+      ['Ledger de-duplication key',result.dedupKey]
+    ];
+    const dl=document.createElement('dl');
+    for(const [k,v] of data){const dt=document.createElement('dt');dt.textContent=k;const dd=document.createElement('dd');dd.textContent=v;dl.append(dt,dd)}
+    const a=document.createElement('a');a.href=INK_EXPLORER+'/tx/'+result.txHash;a.target='_blank';a.rel='noopener noreferrer';a.textContent='View this transaction in the Ink explorer';
+    el('proof-data').append(dl,a);
+  }catch(err){
+    el('status').textContent='NOT VERIFIED — '+String(err?.message||err).slice(0,250)+' Any failed, timed-out or untrusted RPC observation must be verified independently.';
+  }finally{b.disabled=false;}
+});
+</script>
+</body></html>

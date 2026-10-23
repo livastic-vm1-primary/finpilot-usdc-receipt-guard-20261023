@@ -90,6 +90,16 @@ your wallet. It works with fictional records and provides a prospective
 The pure JS module has **15 separate Node.js unit tests** run with
 `node --test tests/browser-demo.test.mjs`. No NPM packages needed.
 
+## NEW — live, read-only Ink mainnet native-USDC proof (2026-10-23)
+
+**Working public page:** https://livastic-vm1-primary.github.io/finpilot-usdc-receipt-guard-20261023/ink-usdc-receipt-proof.html
+
+Unlike the *separate original Base synthetic demo*, this page **does read the real Ink public blockchain** using the official `https://rpc-gel.inkonchain.com` HTTPS JSON-RPC. No wallet connection, credentials, transactions or gas required. It validates the exact native Circle USDC token on chain **57073** (`0x2D270e6886d130D724215A266106e6832161EAEd`), the user-supplied transaction receipt, one exact external Transfer event, recipient, minimum amount, canonical block hash, and the RPC-reported `finalized` block height. The output supplies a unique `57073:txHash:logIndex` evidence key. It only proves an Ink RPC-observed on-chain event — NOT contract payment/independent commercial buyer, L1 Ethereum withdrawal finality, unique ledger accounting, or a developer's earned income.
+
+Built as `docs/ink-usdc-proof.mjs` with 26 dependency-free synthetic negative and positive tests (`node --test tests/ink-usdc-proof.test.mjs`). Verified once against an actual publicly observable unrelated on-chain Ink USDC Transfer, **20.541761 USDC**, tx `0xba6e3b6a1fcfeb40a88f3f227da3929c89396b393c3974444804af5c37d123da`, output `reports/ink_public_chain_readonly_demo.json`. This public unrelated transfer is NOT the operator's customer, revenue, tip, donation, or wallet. Chain and token sources: [Ink network docs](https://docs.inkonchain.com/general/network-information), [Ink canonical payment tokens](https://docs.inkonchain.com/build/paymaster-integration/payment-tokens), [Circle native Ink USDC](https://www.circle.com/multi-chain-usdc/ink). Browser queries only the fixed official RPC and displays `NOT VERIFIED` when any required proof fails. CORS permission was checked on the live public endpoint. No tracking or data collection by this page.
+
+**Separately:** the original `/` Base demo remains wholly fictional and local-only. Running that Base example does NOT read the network, and a synthetic record must never be confused with the real Ink page's event evidence. Neither page executes a payment or proves an earned paycheck.
+
 ## Reproducible synthetic evaluation (2026-10-23 KST)
 
 `PYTHONPATH=. python scripts/evaluate.py` produced 40 deliberately synthetic
@@ -103,7 +113,7 @@ See `reports/synthetic_evaluation.json`.
 
 ## Honest limitations
 
-- No real payment, customer order, chain receipt or mainnet RPC is accessed.
+- The *original synthetic Base ledger and forecast engine* does not access real wallets, payment receipts or mainnet RPC. The separate new Ink page does access Ink public read-only RPC for explicitly entered public receipt hashes, as explained above; neither executes a transfer or establishes service revenue.
 - USDC is a token and this analysis does **not** imply a guaranteed dollar
   peg or compute live conversion prices. Portfolio tax/accounting not supported.
 - Bootstrap samples reuse historical observations and are **not** a calibrated
