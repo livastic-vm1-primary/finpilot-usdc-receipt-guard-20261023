@@ -155,3 +155,19 @@ test('public Ink page cleanly separates real public RPC from fictional Base loca
   assert.ok(readme.includes('original Base synthetic demo'));
   assert.equal(sitemap.split('ink-usdc-receipt-proof.html</loc>').length-1,1);
 });
+
+test('Ink visitor has optional explicit paid QA inquiry, no automatic checkout or wallet signing', async()=>{
+  const {readFileSync}=await import('node:fs');
+  const {fileURLToPath}=await import('node:url');
+  const {dirname,resolve}=await import('node:path');
+  const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
+  const html=readFileSync(resolve(root,'docs/ink-usdc-receipt-proof.html'),'utf8');
+  const scope=readFileSync(resolve(root,'SERVICES.md'),'utf8');
+  assert.ok(html.includes('mailto:onecursor1@gmail.com?subject=FinPilot%20Ink%20USDC%20QA'));
+  assert.ok(html.includes('indicative 25 canonical Base USDC'));
+  assert.ok(html.includes('No checkout or invoice'));
+  assert.ok(scope.includes('Ink mainnet native-USDC receipt QA'));
+  assert.ok(scope.includes('Base mainnet (8453)'));
+  assert.ok(scope.includes('No Ink paid client contracts'));
+  assert.ok(!/eth_sendTransaction|eth_sendRawTransaction|window\.ethereum|wallet_requestPermissions/i.test(html));
+});
